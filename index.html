@@ -89,6 +89,7 @@
     padding:13px 14px; font-size:11.5px; line-height:1.95; color:var(--notice);
   }
   .notice p{ margin:0 } .notice p + p{ margin-top:6px }
+  .notice strong{ font-weight:700; color:#6F5320 }
 
   .lead{ font-size:12.5px; line-height:1.9; color:var(--ink-2); margin:0 }
 
@@ -109,6 +110,13 @@
   .btn[disabled]{ background:#D8DBD7; color:#fff; cursor:default }
   .btn.ghost{ background:transparent; color:var(--ink-2); border:1px solid var(--field-b) }
   .btn.small{ padding:10px 13px; font-size:13px; width:auto }
+  .facebtns{ display:flex; align-items:center; gap:12px; flex-wrap:wrap }
+  .linkbtn{
+    background:none; border:0; padding:4px 2px; font:inherit; font-size:12px;
+    color:var(--ink-2); text-decoration:underline; cursor:pointer;
+  }
+  .linkbtn:hover{ color:var(--bloom) }
+  .linkbtn:focus-visible{ outline:2px solid var(--bloom); outline-offset:2px }
   .btn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px }
   .err{ font-size:12px; line-height:1.8; color:var(--bloom); margin:0 }
 
@@ -239,6 +247,11 @@
     <div>
       <p class="eyebrow" style="color:var(--notice)">photo</p>
       <h2 class="heading ja" style="border-bottom-color:var(--notice)">顔写真</h2>
+    </div>
+    <div class="notice">
+      <p><strong>這裡沒有任何驗證功能，純粹是紀念用的小彩蛋。</strong></p>
+      <p>可以上傳任何一張照片，不一定要放自己的臉。</p>
+      <p>照片只存在你自己的手機裡，不會上傳到任何地方；想換隨時可以重新登錄或刪除。</p>
     </div>
     <div class="card" id="faces"></div>
     <button class="back" id="logout">← 登出</button>
@@ -373,10 +386,15 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
           '<span>'+(has?"\u9854\u5199\u771f\u306e\u767b\u9332\u304c\u5b8c\u4e86\u3057\u307e\u3057\u305f\u3002":"\u9854\u5199\u771f\u306f\u672a\u767b\u9332\u3067\u3059\u3002")+'</span>'+
         '</div>'+
         '<span class="k">'+t.n+'</span>'+
-        '<button class="btn small" type="button">'+(has?"\u91cd\u65b0\u767b\u9332":"\u9854\u5199\u771f\u3092\u767b\u9332")+'</button>'+
+        '<span class="facebtns">'+
+          '<button class="btn small ja" type="button" data-act="reg">'+(has?"\u91cd\u65b0\u767b\u9332":"\u9854\u5199\u771f\u3092\u767b\u9332")+'</button>'+
+          (has?'<button class="linkbtn" type="button" data-act="del">\u522a\u9664\u7167\u7247</button>':'')+
+        '</span>'+
       '</div><div class="photo"></div>';
       photoBox(row.querySelector(".photo"),t.n);
-      row.querySelector("button").addEventListener("click",function(){ pick(t.n,row.querySelector(".photo")) });
+      row.querySelector('[data-act="reg"]').addEventListener("click",function(){ pick(t.n,row.querySelector(".photo")) });
+      var del=row.querySelector('[data-act="del"]');
+      if(del) del.addEventListener("click",function(){ put(PK+t.n,null); renderList() });
       f.appendChild(row);
     });
   }
