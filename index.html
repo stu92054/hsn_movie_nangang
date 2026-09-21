@@ -6,11 +6,11 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#C93B72">
 <style>
-  :root{ color-scheme: light dark;
+  :root{ color-scheme: light;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px); }
   html{ -webkit-text-size-adjust:100% }
-  body{ margin:0; font:14px system-ui, sans-serif; background:#FAFAF8 }
+  body{ margin:0; font:14px system-ui, sans-serif; background:#FFFFFF }
   img{ max-width:100% }
   [hidden]{ display:none !important }
 </style>
@@ -21,7 +21,7 @@
 <style>
   :root{
     --paper:#FFFFFF;
-    --ground:#ECEFE9;
+    --ground:#E8EBE6;
     --ground-2:#E0E5DC;
     --ink:#17191C;
     --ink-2:#646A72;
@@ -37,34 +37,26 @@
     --notice-bg:#FDFAF2;
     --shadow:0 1px 2px rgba(23,25,28,.06), 0 10px 28px -14px rgba(23,25,28,.28);
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#12151A; --ground-2:#0B0E12;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -16px rgba(0,0,0,.75);
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#12151A; --ground-2:#0B0E12;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -16px rgba(0,0,0,.75);
-  }
 
   *{box-sizing:border-box}
   html,body{min-height:100%}
   body{
     margin:0;
-    background:linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%);
-    background-attachment:fixed;
+    background:var(--paper);
+    transition:background-color .18s ease;
     font-family:"Noto Sans TC","Hiragino Sans","Yu Gothic",system-ui,-apple-system,sans-serif;
     color:var(--ink);
     -webkit-font-smoothing:antialiased;
   }
+  body.on-ticket{ background:var(--ground) }
+  @media (prefers-reduced-motion:reduce){ body{ transition:none } }
   .shell{ max-width:430px; margin:0 auto; padding-inline:14px; padding-block:0 40px }
 
   /* ── 品牌列 ── */
   .brandbar{
     background:var(--paper); margin-inline:-14px; padding:16px 18px 14px;
-    display:flex; align-items:baseline; gap:9px; box-shadow:var(--shadow);
-    position:relative; z-index:2;
+    display:flex; align-items:baseline; gap:9px;
+    border-bottom:1px solid var(--rule); position:relative; z-index:2;
   }
   .brandbar .mark{
     font-size:23px; font-weight:900; color:var(--bloom); letter-spacing:.02em; line-height:1;
@@ -86,7 +78,7 @@
   }
 
   /* ── 卡片 ── */
-  .card{ background:var(--paper); border-radius:3px; box-shadow:var(--shadow); padding:20px 18px; color:var(--ink) }
+  .card{ background:var(--paper); border:1px solid var(--rule); border-radius:3px; padding:20px 18px; color:var(--ink) }
   .notice{
     border:1px solid var(--notice-b); background:var(--notice-bg); border-radius:3px;
     padding:13px 14px; font-size:11.5px; line-height:1.95; color:var(--notice);
@@ -118,10 +110,11 @@
   /* ── 票券列表 ── */
   .tlist{ display:flex; flex-direction:column; gap:12px }
   .trow{
-    background:var(--paper); border-radius:3px; box-shadow:var(--shadow);
+    background:var(--paper); border-radius:3px; border:1px solid var(--rule);
     padding:15px 14px; display:flex; align-items:center; gap:12px;
-    cursor:pointer; border:0; text-align:left; font:inherit; color:var(--ink); width:100%;
+    cursor:pointer; text-align:left; font:inherit; color:var(--ink); width:100%;
   }
+  .trow:hover{ border-color:var(--ink-3) }
   .trow:focus-visible{ outline:2px solid var(--bloom); outline-offset:2px }
   .stub{
     flex:none; width:48px; height:40px; border:1.5px solid var(--ink-3); border-radius:2px;
@@ -151,11 +144,6 @@
   }
   .photo img{ width:100%; height:100%; object-fit:cover; display:block }
   .photo .ph{ font-size:9.5px; color:var(--ink-3); text-align:center; line-height:1.8; letter-spacing:.08em }
-  .stamp{
-    position:absolute; right:5px; bottom:5px; font-size:8.5px; font-weight:900; letter-spacing:.1em;
-    color:var(--bloom); border:1.5px solid var(--bloom); border-radius:2px; padding:2px 4px;
-    background:rgba(255,255,255,.9); transform:rotate(-6deg);
-  }
   .scanning{ position:absolute; inset:0; background:rgba(255,255,255,.5) }
   .scanning::after{
     content:""; position:absolute; left:0; right:0; height:2px; background:var(--bloom);
@@ -187,7 +175,7 @@
   .perf{ position:relative; height:26px; display:flex; align-items:center }
   .perf::before,.perf::after{
     content:""; position:absolute; width:22px; height:22px; border-radius:50%;
-    background:var(--ground-2); top:50%; transform:translateY(-50%);
+    background:var(--ground); top:50%; transform:translateY(-50%);
     box-shadow:inset 0 1px 2px rgba(23,25,28,.14);
   }
   .perf::before{ left:-11px } .perf::after{ right:-11px }
@@ -201,10 +189,6 @@
   .back:focus-visible{ outline:2px solid var(--bloom); outline-offset:2px }
   .foot{ font-size:10.5px; line-height:1.95; color:var(--ink-2); text-align:center; margin:6px 2px 0 }
   .foot strong{ color:var(--ink); font-weight:700 }
-  :root:not([data-theme="light"]) .foot{ color:#98A0A9 }
-  :root[data-theme="dark"] .foot{ color:#98A0A9 }
-  :root:not([data-theme="light"]) .foot strong{ color:#D6DCE2 }
-  :root[data-theme="dark"] .foot strong{ color:#D6DCE2 }
 </style>
 </head>
 <body>
@@ -338,15 +322,15 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
     });
   }
 
-  function view(id){ ["v-login","v-list","v-ticket"].forEach(function(v){ $(v).hidden=(v!==id) }); window.scrollTo(0,0) }
+  function view(id){ ["v-login","v-list","v-ticket"].forEach(function(v){ $(v).hidden=(v!==id) });
+    document.body.classList.toggle("on-ticket", id==="v-ticket"); window.scrollTo(0,0) }
   function seatOf(t){ return t.s ? ((EVENT.hall?EVENT.hall+"\u3000":"")+t.s) : null }
   function find(name){ for(var i=0;i<tickets.length;i++) if(tickets[i].n===name) return tickets[i]; return null }
 
-  function photoBox(el,name,stamp){
+  function photoBox(el,name){
     var d=get(PK+name); el.innerHTML="";
     if(d){
       var im=document.createElement("img"); im.src=d; im.alt="登錄照片"; el.appendChild(im);
-      if(stamp){var st=document.createElement("span");st.className="stamp";st.textContent="\u8a8d\u8a3c\u6e08";el.appendChild(st)}
     }else{
       var p=document.createElement("span"); p.className="ph"; p.innerHTML="\u672a\u767b\u9304<br>NO PHOTO"; el.appendChild(p);
     }
@@ -382,7 +366,7 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
         '<span class="k">'+t.n+'</span>'+
         '<button class="btn small" type="button">'+(has?"\u91cd\u65b0\u767b\u9332":"\u9854\u5199\u771f\u3092\u767b\u9332")+'</button>'+
       '</div><div class="photo"></div>';
-      photoBox(row.querySelector(".photo"),t.n,false);
+      photoBox(row.querySelector(".photo"),t.n);
       row.querySelector("button").addEventListener("click",function(){ pick(t.n,row.querySelector(".photo")) });
       f.appendChild(row);
     });
@@ -399,7 +383,7 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
     el.textContent = s || "\u5ea7\u5e2d\u756a\u53f7\u306f\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059";
     el.className = s ? "v" : "v pend";
     $("d-reg").textContent = get(PK+name) ? "\u91cd\u65b0\u767b\u9332" : "\u9854\u5199\u771f\u3092\u767b\u9332";
-    photoBox($("d-photo"),name,true);
+    photoBox($("d-photo"),name);
     view("v-ticket");
   }
 
