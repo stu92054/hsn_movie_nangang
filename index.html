@@ -17,7 +17,7 @@
 <title>蓮之空包場入場券</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
 <style>
   :root{
     --paper:#FFFFFF;
@@ -36,6 +36,11 @@
     --notice-b:#E2D4B4;
     --notice-bg:#FDFAF2;
     --shadow:0 1px 2px rgba(23,25,28,.06), 0 10px 28px -14px rgba(23,25,28,.28);
+  }
+
+  /* 日文字串用 JP 字型，避免 顔/写/実 等新字體掉回系統字 */
+  .ja, .k, .okbar, .t-times .lbl, .photo .ph{
+    font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
   }
 
   *{box-sizing:border-box}
@@ -162,9 +167,10 @@
   .t-body{ padding:17px 20px 18px; display:flex; flex-direction:column; gap:13px }
   .t-kicker{ font-size:11.5px; color:var(--ink-2); margin:0 }
   .t-date{ margin:0; font-weight:900; font-size:clamp(24px,7.2vw,30px); line-height:1.15; letter-spacing:-.015em; font-variant-numeric:tabular-nums }
-  .t-times{ display:flex; gap:18px; flex-wrap:wrap; margin:0; font-size:14px; font-weight:500 }
-  .t-times b{ font-weight:900; font-variant-numeric:tabular-nums; margin-left:5px }
-  .t-times span{ color:var(--leaf); font-weight:700; font-size:12.5px }
+  .t-times{ display:flex; gap:22px; flex-wrap:wrap; margin:0; align-items:baseline }
+  .t-times .pair{ display:inline-flex; align-items:baseline; gap:7px }
+  .t-times .lbl{ color:var(--leaf); font-weight:700; font-size:12.5px; letter-spacing:.06em }
+  .t-times b{ font-weight:900; font-size:15.5px; font-variant-numeric:tabular-nums; line-height:1 }
   .t-venue{ margin:0; line-height:1.7 }
   .t-venue .v-name{ font-size:14.5px; font-weight:700; display:block }
   .t-venue .v-addr{ font-size:11.5px; color:var(--ink-2); display:block }
@@ -202,11 +208,11 @@
   <section class="page" id="v-login">
     <div>
       <p class="eyebrow">login</p>
-      <h2 class="heading">入場用顔写真登録／座席確認</h2>
+      <h2 class="heading ja">入場用顔写真登録／座席確認</h2>
     </div>
     <div class="notice">
       <p>請以報名時填寫的 Email 登入，即可確認座位並登錄入場用顔写真。</p>
-      <p>※ 顔写真は入場時の本人確認に使用します。</p>
+      <p class="ja">※ 顔写真は入場時の本人確認に使用します。</p>
     </div>
     <div class="card">
       <div class="field">
@@ -214,7 +220,7 @@
         <input type="email" id="acct" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="報名時登錄的 Email">
       </div>
       <p class="err" id="err" hidden></p>
-      <div style="margin-top:16px"><button class="btn" id="login">ログイン</button></div>
+      <div style="margin-top:16px"><button class="btn ja" id="login">ログイン</button></div>
     </div>
     <p class="lead" style="text-align:center">請用收到這個連結的那個信箱登入。<br>信箱對不上的話，私訊蛋頭就好。</p>
   </section>
@@ -223,16 +229,16 @@
   <section class="page" id="v-list" hidden>
     <div>
       <p class="eyebrow">tickets</p>
-      <h2 class="heading">チケット照会</h2>
+      <h2 class="heading ja">チケット照会</h2>
     </div>
     <div class="tlist" id="tlist"></div>
     <div class="notice">
-      <p>※ 座席番号は当日の受付にてお知らせいたします。</p>
+      <p class="ja">※ 座席番号は当日の受付にてお知らせいたします。</p>
       <p>※ 顔認証システムで本人と判別できない場合は、受付で蛋頭に声をかけてください。</p>
     </div>
     <div>
       <p class="eyebrow" style="color:var(--notice)">photo</p>
-      <h2 class="heading" style="border-bottom-color:var(--notice)">顔写真</h2>
+      <h2 class="heading ja" style="border-bottom-color:var(--notice)">顔写真</h2>
     </div>
     <div class="card" id="faces"></div>
     <button class="back" id="logout">← 登出</button>
@@ -240,7 +246,7 @@
 
   <!-- ③ 票券 -->
   <section class="page" id="v-ticket" hidden>
-    <button class="back" id="back">← チケット照会へ</button>
+    <button class="back ja" id="back">← チケット照会へ</button>
     <div class="ticket">
       <div class="t-head">
         <p class="t-series">HASUNOSORA ／ 蓮之空同好包場</p>
@@ -252,7 +258,10 @@
       <div class="t-body">
         <p class="t-kicker" id="d-kicker"></p>
         <p class="t-date" id="d-date"></p>
-        <p class="t-times"><span>開場</span><b id="d-open"></b><span>開演</span><b id="d-start"></b></p>
+        <p class="t-times">
+          <span class="pair"><span class="lbl">開場</span><b id="d-open"></b></span>
+          <span class="pair"><span class="lbl">開演</span><b id="d-start"></b></span>
+        </p>
         <hr class="hair">
         <p class="t-venue"><span class="v-name" id="d-venue"></span><span class="v-addr" id="d-addr"></span></p>
         <div class="row"><span class="k">座席番号</span><span class="v" id="d-seat"></span></div>
@@ -262,7 +271,7 @@
       <div class="t-foot">
         <div class="facecol">
           <span class="k">入場用顔写真</span>
-          <button class="btn small" id="d-reg">顔写真を登録</button>
+          <button class="btn small ja" id="d-reg">顔写真を登録</button>
         </div>
         <div class="photo" id="d-photo"></div>
       </div>
@@ -346,8 +355,8 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
           '<span class="small">'+EVENT.kicker+'</span>'+
           '<span class="big">'+EVENT.date+' '+EVENT.start+'</span>'+
           '<span class="line">[\u958b\u5834] '+EVENT.open+'\u3000[\u958b\u6f14] '+EVENT.start+'<br>'+EVENT.venue+'</span>'+
-          '<span class="line">\u5ea7\u5e2d\u756a\u53f7\u3000'+(seat||"\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059")+'</span>'+
-          '<span class="nm">\u6c0f\u540d\u3000'+t.n+'</span>'+
+          '<span class="line ja">\u5ea7\u5e2d\u756a\u53f7\u3000'+(seat||"\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059")+'</span>'+
+          '<span class="nm ja">\u6c0f\u540d\u3000'+t.n+'</span>'+
         '</span>'+
         '<span class="chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2l4 4-4 4"/></svg></span>';
       b.addEventListener("click",function(){ openTicket(t.n) });
@@ -381,7 +390,7 @@ var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
     $("d-who").textContent=name;
     var s=seatOf(t), el=$("d-seat");
     el.textContent = s || "\u5ea7\u5e2d\u756a\u53f7\u306f\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059";
-    el.className = s ? "v" : "v pend";
+    el.className = s ? "v" : "v pend ja";
     $("d-reg").textContent = get(PK+name) ? "\u91cd\u65b0\u767b\u9332" : "\u9854\u5199\u771f\u3092\u767b\u9332";
     photoBox($("d-photo"),name);
     view("v-ticket");
