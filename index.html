@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#C93B72">
+<style>
+  :root{ color-scheme: light dark;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html{ -webkit-text-size-adjust:100% }
+  body{ margin:0; font:14px system-ui, sans-serif; background:#FAFAF8 }
+  img{ max-width:100% }
+  [hidden]{ display:none !important }
+</style>
+<title>蓮之空包場入場券</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --ground:#ECEFE9;
+    --ground-2:#E0E5DC;
+    --ink:#17191C;
+    --ink-2:#646A72;
+    --ink-3:#9AA0A6;
+    --rule:#E3E5E2;
+    --field:#FBFCFB;
+    --field-b:#D7DAD6;
+    --bloom:#C93B72;
+    --bloom-soft:#FBEEF3;
+    --leaf:#3D6A4C;
+    --notice:#8A6A2F;
+    --notice-b:#E2D4B4;
+    --notice-bg:#FDFAF2;
+    --shadow:0 1px 2px rgba(23,25,28,.06), 0 10px 28px -14px rgba(23,25,28,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#12151A; --ground-2:#0B0E12;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -16px rgba(0,0,0,.75);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#12151A; --ground-2:#0B0E12;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 44px -16px rgba(0,0,0,.75);
+  }
+
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    margin:0;
+    background:linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%);
+    background-attachment:fixed;
+    font-family:"Noto Sans TC","Hiragino Sans","Yu Gothic",system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .shell{ max-width:430px; margin:0 auto; padding-inline:14px; padding-block:0 40px }
+
+  /* ── 品牌列 ── */
+  .brandbar{
+    background:var(--paper); margin-inline:-14px; padding:16px 18px 14px;
+    display:flex; align-items:baseline; gap:9px; box-shadow:var(--shadow);
+    position:relative; z-index:2;
+  }
+  .brandbar .mark{
+    font-size:23px; font-weight:900; color:var(--bloom); letter-spacing:.02em; line-height:1;
+  }
+  .brandbar .mark em{ font-style:normal; font-size:15px; vertical-align:super; margin-left:1px }
+  .fanmade{
+    margin-left:auto; font-size:9px; font-weight:900; letter-spacing:.1em;
+    color:var(--ink-3); border:1px solid currentColor; border-radius:2px; padding:2px 5px;
+    align-self:center; white-space:nowrap;
+  }
+
+  .page{ padding-top:18px; display:flex; flex-direction:column; gap:14px }
+
+  /* ── 標題 ── */
+  .eyebrow{ font-size:10px; font-weight:700; letter-spacing:.16em; color:var(--bloom); margin:0 }
+  h2.heading{
+    margin:2px 0 0; font-size:21px; font-weight:900; letter-spacing:.02em;
+    padding-bottom:9px; border-bottom:2px solid var(--bloom); align-self:flex-start;
+  }
+
+  /* ── 卡片 ── */
+  .card{ background:var(--paper); border-radius:3px; box-shadow:var(--shadow); padding:20px 18px; color:var(--ink) }
+  .notice{
+    border:1px solid var(--notice-b); background:var(--notice-bg); border-radius:3px;
+    padding:13px 14px; font-size:11.5px; line-height:1.95; color:var(--notice);
+  }
+  .notice p{ margin:0 } .notice p + p{ margin-top:6px }
+
+  .lead{ font-size:12.5px; line-height:1.9; color:var(--ink-2); margin:0 }
+
+  /* ── 表單 ── */
+  .field{ display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--field-b); padding:10px 2px }
+  .field svg{ flex:none; color:var(--ink-3) }
+  .field input{
+    font:inherit; font-size:16px; border:0; background:transparent; color:var(--ink);
+    width:100%; padding:2px 0;
+  }
+  .field input:focus{ outline:none }
+  .field:focus-within{ border-bottom-color:var(--bloom) }
+  .btn{
+    font:inherit; font-weight:700; font-size:14.5px; letter-spacing:.04em;
+    border:0; border-radius:3px; padding:13px 16px; cursor:pointer; width:100%;
+    background:var(--bloom); color:#fff;
+  }
+  .btn[disabled]{ background:#D8DBD7; color:#fff; cursor:default }
+  .btn.ghost{ background:transparent; color:var(--ink-2); border:1px solid var(--field-b) }
+  .btn.small{ padding:10px 13px; font-size:13px; width:auto }
+  .btn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px }
+  .err{ font-size:12px; line-height:1.8; color:var(--bloom); margin:0 }
+
+  /* ── 票券列表 ── */
+  .tlist{ display:flex; flex-direction:column; gap:12px }
+  .trow{
+    background:var(--paper); border-radius:3px; box-shadow:var(--shadow);
+    padding:15px 14px; display:flex; align-items:center; gap:12px;
+    cursor:pointer; border:0; text-align:left; font:inherit; color:var(--ink); width:100%;
+  }
+  .trow:focus-visible{ outline:2px solid var(--bloom); outline-offset:2px }
+  .stub{
+    flex:none; width:48px; height:40px; border:1.5px solid var(--ink-3); border-radius:2px;
+    display:flex; align-items:center; justify-content:center; color:var(--ink-3);
+  }
+  .tmeta{ flex:1; min-width:0; display:flex; flex-direction:column; gap:3px }
+  .tmeta .small{ font-size:10px; color:var(--ink-2) }
+  .tmeta .big{ font-size:15.5px; font-weight:900; font-variant-numeric:tabular-nums; letter-spacing:-.01em }
+  .tmeta .line{ font-size:10.5px; color:var(--ink-2); line-height:1.65 }
+  .tmeta .nm{ font-size:12.5px; font-weight:700; margin-top:2px }
+  .chev{ flex:none; width:26px; height:26px; border-radius:50%; background:var(--ink-3); color:#fff; display:flex; align-items:center; justify-content:center }
+
+  /* ── 顔写真 ── */
+  .okbar{
+    display:flex; align-items:center; gap:9px; border-left:4px solid var(--leaf);
+    background:#F2F7F3; padding:11px 12px; font-size:12.5px; font-weight:700; color:var(--leaf);
+  }
+  .okbar.none{ border-left-color:var(--ink-3); background:#F5F6F4; color:var(--ink-2) }
+  .facerow{ display:flex; gap:14px; align-items:flex-end; margin-top:13px }
+  .facerow + .facerow{ margin-top:18px; padding-top:18px; border-top:1px solid var(--rule) }
+  .facecol{ flex:1; min-width:0; display:flex; flex-direction:column; gap:8px }
+  .k{ font-size:10px; font-weight:700; letter-spacing:.14em; color:var(--ink-3) }
+  .photo{
+    width:96px; height:122px; flex:none; border:1px solid var(--rule); background:#F2F4F1;
+    border-radius:2px; overflow:hidden; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block }
+  .photo .ph{ font-size:9.5px; color:var(--ink-3); text-align:center; line-height:1.8; letter-spacing:.08em }
+  .stamp{
+    position:absolute; right:5px; bottom:5px; font-size:8.5px; font-weight:900; letter-spacing:.1em;
+    color:var(--bloom); border:1.5px solid var(--bloom); border-radius:2px; padding:2px 4px;
+    background:rgba(255,255,255,.9); transform:rotate(-6deg);
+  }
+  .scanning{ position:absolute; inset:0; background:rgba(255,255,255,.5) }
+  .scanning::after{
+    content:""; position:absolute; left:0; right:0; height:2px; background:var(--bloom);
+    box-shadow:0 0 10px 2px rgba(201,59,114,.5); animation:scan 1s ease-in-out infinite alternate;
+  }
+  @keyframes scan{ from{top:5%} to{top:95%} }
+  @media (prefers-reduced-motion:reduce){ .scanning::after{ animation:none; top:50% } }
+
+  /* ── 票券本體 ── */
+  .ticket{ background:var(--paper); border-radius:3px; box-shadow:var(--shadow); overflow:hidden; color:var(--ink) }
+  .t-head{ padding:22px 20px 0; text-align:center }
+  .t-series{ font-size:9.5px; font-weight:700; letter-spacing:.22em; color:var(--leaf); margin:0 0 9px }
+  .t-title{ margin:0; font-size:18px; font-weight:900; line-height:1.45; text-wrap:balance }
+  .t-title .sub{ display:block; font-size:12px; font-weight:500; color:var(--ink-2); margin-top:7px; letter-spacing:.04em }
+  .t-orn{ margin:15px auto 0; width:42px; height:1px; background:var(--bloom); opacity:.5 }
+  .t-body{ padding:17px 20px 18px; display:flex; flex-direction:column; gap:13px }
+  .t-kicker{ font-size:11.5px; color:var(--ink-2); margin:0 }
+  .t-date{ margin:0; font-weight:900; font-size:clamp(24px,7.2vw,30px); line-height:1.15; letter-spacing:-.015em; font-variant-numeric:tabular-nums }
+  .t-times{ display:flex; gap:18px; flex-wrap:wrap; margin:0; font-size:14px; font-weight:500 }
+  .t-times b{ font-weight:900; font-variant-numeric:tabular-nums; margin-left:5px }
+  .t-times span{ color:var(--leaf); font-weight:700; font-size:12.5px }
+  .t-venue{ margin:0; line-height:1.7 }
+  .t-venue .v-name{ font-size:14.5px; font-weight:700; display:block }
+  .t-venue .v-addr{ font-size:11.5px; color:var(--ink-2); display:block }
+  .row{ display:flex; flex-direction:column; gap:4px }
+  .row .v{ font-size:16.5px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.4 }
+  .row .v.pend{ font-size:13px; font-weight:500; color:var(--ink-2) }
+  hr.hair{ border:0; border-top:1px solid var(--rule); margin:1px 0 }
+  .perf{ position:relative; height:26px; display:flex; align-items:center }
+  .perf::before,.perf::after{
+    content:""; position:absolute; width:22px; height:22px; border-radius:50%;
+    background:var(--ground-2); top:50%; transform:translateY(-50%);
+    box-shadow:inset 0 1px 2px rgba(23,25,28,.14);
+  }
+  .perf::before{ left:-11px } .perf::after{ right:-11px }
+  .perf i{ display:block; flex:1; margin:0 18px; height:0; border-top:2px dashed #D3D7D1 }
+  .t-foot{ padding:2px 20px 22px; display:flex; gap:14px; align-items:flex-end }
+
+  .back{
+    background:none; border:0; font:inherit; font-size:13px; font-weight:700; color:var(--ink-2);
+    cursor:pointer; padding:4px 0; display:flex; align-items:center; gap:6px; align-self:flex-start;
+  }
+  .back:focus-visible{ outline:2px solid var(--bloom); outline-offset:2px }
+  .foot{ font-size:10.5px; line-height:1.95; color:var(--ink-2); text-align:center; margin:6px 2px 0 }
+  .foot strong{ color:var(--ink); font-weight:700 }
+  :root:not([data-theme="light"]) .foot{ color:#98A0A9 }
+  :root[data-theme="dark"] .foot{ color:#98A0A9 }
+  :root:not([data-theme="light"]) .foot strong{ color:#D6DCE2 }
+  :root[data-theme="dark"] .foot strong{ color:#D6DCE2 }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="brandbar">
+    <span class="mark">蓮<em>+</em></span>
+    <span class="fanmade">FAN MADE</span>
+  </div>
+
+  <!-- ① 登入 -->
+  <section class="page" id="v-login">
+    <div>
+      <p class="eyebrow">login</p>
+      <h2 class="heading">入場用顔写真登録／座席確認</h2>
+    </div>
+    <div class="notice">
+      <p>請以報名時填寫的 Email 登入，即可確認座位並登錄入場用顔写真。</p>
+      <p>※ 顔写真は入場時の本人確認に使用します。</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm0 1.5c-3 0-6 1.5-6 3.5v1h12v-1c0-2-3-3.5-6-3.5z"/></svg>
+        <input type="email" id="acct" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="報名時登錄的 Email">
+      </div>
+      <p class="err" id="err" hidden></p>
+      <div style="margin-top:16px"><button class="btn" id="login">ログイン</button></div>
+    </div>
+    <p class="lead" style="text-align:center">請用收到這個連結的那個信箱登入。<br>信箱對不上的話，私訊蛋頭就好。</p>
+  </section>
+
+  <!-- ② 票券總覽 -->
+  <section class="page" id="v-list" hidden>
+    <div>
+      <p class="eyebrow">tickets</p>
+      <h2 class="heading">チケット照会</h2>
+    </div>
+    <div class="tlist" id="tlist"></div>
+    <div class="notice">
+      <p>※ 座席番号は当日の受付にてお知らせいたします。</p>
+      <p>※ 顔認証システムで本人と判別できない場合は、受付で蛋頭に声をかけてください。</p>
+    </div>
+    <div>
+      <p class="eyebrow" style="color:var(--notice)">photo</p>
+      <h2 class="heading" style="border-bottom-color:var(--notice)">顔写真</h2>
+    </div>
+    <div class="card" id="faces"></div>
+    <button class="back" id="logout">← 登出</button>
+  </section>
+
+  <!-- ③ 票券 -->
+  <section class="page" id="v-ticket" hidden>
+    <button class="back" id="back">← チケット照会へ</button>
+    <div class="ticket">
+      <div class="t-head">
+        <p class="t-series">HASUNOSORA ／ 蓮之空同好包場</p>
+        <h3 class="t-title">劇場版 Love Live!<br>蓮之空女學院學園偶像俱樂部
+          <span class="sub">Bloom Garden Party ／ 應援場</span>
+        </h3>
+        <div class="t-orn"></div>
+      </div>
+      <div class="t-body">
+        <p class="t-kicker" id="d-kicker"></p>
+        <p class="t-date" id="d-date"></p>
+        <p class="t-times"><span>開場</span><b id="d-open"></b><span>開演</span><b id="d-start"></b></p>
+        <hr class="hair">
+        <p class="t-venue"><span class="v-name" id="d-venue"></span><span class="v-addr" id="d-addr"></span></p>
+        <div class="row"><span class="k">座席番号</span><span class="v" id="d-seat"></span></div>
+        <div class="row"><span class="k">氏名</span><span class="v" id="d-who"></span></div>
+      </div>
+      <div class="perf"><i></i></div>
+      <div class="t-foot">
+        <div class="facecol">
+          <span class="k">入場用顔写真</span>
+          <button class="btn small" id="d-reg">顔写真を登録</button>
+        </div>
+        <div class="photo" id="d-photo"></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">
+    <strong>這是主辦自製的紀念頁面，不是官方票券。</strong><br>
+    沒有任何驗證功能，照片只存在你自己的手機裡，不會上傳到任何地方。<br>
+    當天請到報到桌找蛋頭領實體電影票。
+  </p>
+</div>
+
+<input type="file" id="file" accept="image/*" hidden>
+
+<script>
+/* ═══════════ 要改的都在這裡 ═══════════ */
+var EVENT = {
+  kicker:"10月4日（日）公演",
+  date:"2026年10月4日（日）",
+  open:"15:00",                 // 開場
+  start:"16:00",                // 開演 ← 影城確定後改
+  venue:"南港 LaLaport 威秀影城",
+  addr:"台北市南港區環河里經貿二路131號5樓",            // ← 填完整地址
+  hall:""                       // 例 "第 8 廳"，留空則顯示待公告
+};
+/* ════════════════════════════════════ */
+
+var ACCOUNTS = [{"h":["8bf6fbc1dd5180c6"],"k":[{"i":"8bf6fbc1dd5180c6","s":"opkgmdLRJ2RjCJi0Wf/1Lg==","v":"cTwav7iCGRoMTP0m","c":"3Ty7XEbJd8S6HEuvKya7qJbvPAi8981JK8G3tSKGM6C9SFYMy6EFHDR/r39U"}]},{"h":["4d9c3c8882ca5b3e"],"k":[{"i":"4d9c3c8882ca5b3e","s":"9BAaYO3PlkYyJ5S2FjEPiQ==","v":"Emo8X27xNrEnkWYI","c":"sS/NxMde+Lez88mAm9VVMcM561nx5e/e+wUM45eZ9z/7IPcTkBFupSsQjpcVmLSC"}]},{"h":["36777694058fe6db"],"k":[{"i":"36777694058fe6db","s":"DUDFq8qtRGEJnYM3S56G1Q==","v":"LQuLfpZv1qZFFh+A","c":"TVNCTxOf5onjSdIAtbwvBIUN8HtoDfREndNofolUurkbtvQzUREEj4ZdMn0x"}]},{"h":["58b9ed21e45829a2"],"k":[{"i":"58b9ed21e45829a2","s":"DLJ+95/pQpHjoFIkj60uig==","v":"jA08xrNXeJiY84RV","c":"R2y8WgEcEHiuOUZfn09EiKzKLpS9Be4CmOZWv7C8BFAROk1Ld0YR3xhI5TjI"}]},{"h":["88fe175e322296e9"],"k":[{"i":"88fe175e322296e9","s":"iSfJWuq42xM9XDN+VjUseQ==","v":"8uFgyN4tzRLAkxnp","c":"KVYh8NTcXOkKEAnMTY3Hzt+bFq5TpUByy1IjjAkQB7OGNJwbpoH58Upo0UrLiMWa4wCjxAYw0a12/X5HaannZ0qQ7w=="}]},{"h":["a6be904b8c1a6e47"],"k":[{"i":"a6be904b8c1a6e47","s":"7CHxdhR/DuAqnekXhRMFtA==","v":"gEGdhMme783oENy+","c":"Jq6Jq9hMb5dPvKXTwcnBmiRWGGTrtPqb+2kdHUZ6HeguzjQo0+QqJ8UAFcr9DumjU4Hhnl2a6U57W8EYLg=="}]},{"h":["f91fd1cb2e5310d3"],"k":[{"i":"f91fd1cb2e5310d3","s":"S9Hwh1enZ4MYUDVa6wvIQQ==","v":"qHYJbI63cOr+7UuF","c":"QU1u3bfAjfMPcZ7mmu5LSKSGJgkN4CzvrvUflC/fwnecW3Zuygwt5T4PnR8HDb1xn+Fe"}]},{"h":["f2583c5cb66321ea"],"k":[{"i":"f2583c5cb66321ea","s":"5Z+3PHAWy7f1Ihw6Wpv/oA==","v":"rCP2QHKq7vWnJV2u","c":"v0xrzSbpdvQQGjCYpFKith1m+OaIsWc4vNvrEi9Hx/Wr/TNn9p0uWTHksmF49b5s4kh5vCw4sQeoaVb7mcBZXH4TYQ=="}]},{"h":["da1c5884a57854ee"],"k":[{"i":"da1c5884a57854ee","s":"2FNogepo/SC8LrkhhiAZcQ==","v":"hWp4lAAwn0ADEgBx","c":"21oqMrCps8LR/ILZ2cqQUolFhvFjKcnIghN0GDgzZUq9UMn/GVri4C+hsdsS"}]},{"h":["78e02f6fd6af3e2e"],"k":[{"i":"78e02f6fd6af3e2e","s":"7ktdhRsAOm98wpBHoexk6w==","v":"Ggvk84MlvBeKk/q0","c":"soyWfTM9O8dWc5FxKdUCcMoE3ISupP4bBv9I1RyYXZQZPqwygd8lv1IyAB+hFA=="}]},{"h":["c79f46557d97a3fd"],"k":[{"i":"c79f46557d97a3fd","s":"hmiW569qNUlWZNhip4PB+g==","v":"ljQv/mA8BIVP+Z0c","c":"kz+iCeXYZQqcrvEUG2QLYqaFExkwNEj4OtxYz4+RV5oDkbOlTfOZIYR4sC8ncTdCn94k/eI="}]},{"h":["ce4b37b2e5abdc88"],"k":[{"i":"ce4b37b2e5abdc88","s":"KMzZtlK4csh//SJOZnN5dQ==","v":"qsSBT761lKyDgKEH","c":"u5R/jz/daydyRN+3830Y2Zqi0d00pkEzHC9ZwGuqmwbSXXxZMoJ7+IafXsy1"}]},{"h":["d1644f220064e0ef","d8341c460a9176be"],"k":[{"i":"d1644f220064e0ef","s":"gtONcHqm14xyNZjQPLUxlg==","v":"8wGkohyfa6GJiRef","c":"YVYduF4RbNxeI0bAjVEgPsPtcgR0Em7n/UXwJKpfIRfYTolQDd8X2raU"},{"i":"d8341c460a9176be","s":"FmarTF9jVW9qzM3HKUtFDw==","v":"MlMQGUdvxzwfFPbZ","c":"VxRm12WANjnHAHrMNX48DXpm4hno/A4fOsX0cg6laDUDTENTjwUAUGC1"}]},{"h":["401f3b18edeb266a"],"k":[{"i":"401f3b18edeb266a","s":"54pNaTSOx06ZOywF0zDvWg==","v":"p6iA8X3XkB0IQm77","c":"I48Pnvh6T7LGKPxxBf61/ysMrVKNEzFenMJjLrr6p9m2Z/PjGcAMz/pAYzD4jXwg"}]},{"h":["1a5d8457966be3f6"],"k":[{"i":"1a5d8457966be3f6","s":"UQpK0t0frXOPf9HyEN645A==","v":"pfFsparRn5TNDw3I","c":"/tSBVZ/ypKHynnRjlutQc6N2LznxoSufsN2f11H0FGWNBHglR3IwGj6bqSNCTar4"}]},{"h":["717167991a3e41fa"],"k":[{"i":"717167991a3e41fa","s":"hmpVDbkBUbs8VXxkwPQKvA==","v":"5+JxvtRksoG62aOW","c":"0s3l/MMuqDzjOsusOG3LRWxgp1nvRSKIHko5KsdfbU1Kmdb9iKkARuMaFw=="}]},{"h":["e5de2ea2d90713a2","5be91ab27bb1d8ea"],"k":[{"i":"e5de2ea2d90713a2","s":"vbK9Y5YCiWJqZRJ1G1Vfsg==","v":"k1i6g+/bYnCUtDg4","c":"diYlugs5Qe8w2ZLgY+bX0Ds8MHxZ/s7Fi9bw9F2NeMUYYFHEz4RICstr91Jk31fQ+A9dqVGQrGcCZWUw"},{"i":"5be91ab27bb1d8ea","s":"YgoDlu0tkXxrz8h1lboTxQ==","v":"B/SJH1ACUbr+lh4E","c":"hz3R4aHoUz8r2lXDQ5ENDmJ768P4ojEnbsH8qaAidw3d9JfuUNbjn9CYrOQ4TamOQynRikBjWO2GAMtC"}]},{"h":["cfcfc2aa4323ad23"],"k":[{"i":"cfcfc2aa4323ad23","s":"5lDPMPjwnjhZvFsRYDtP2g==","v":"PUtOVbHuWVAUmeqq","c":"bWRStOLiUokdmrCj9j7RG6PF8wLO2raaEvPaWUyKCvFPeU/JqExIP+QuXb4P+mJS+TarexHX7izzaJKjeminN+2wLfKwJw=="}]},{"h":["359c2fb4387ccacb"],"k":[{"i":"359c2fb4387ccacb","s":"6yTR7liFRp4lZvjaTYb7mg==","v":"Ff6JIqJn9or/C2fV","c":"JCAj/uAxorpwYocMZZb0pl5WZcgdzNYTrEB3kZl8QImnrg1FFCAQr+RUW31k"}]},{"h":["58b9ed21e45829a2"],"k":[{"i":"58b9ed21e45829a2","s":"Fhm4Yc0wQVyIZM7lW8FT6A==","v":"JE7I6uhzfkw63OIY","c":"y0mUvb6yv0ZeupJs9oOjyosfeM/wpSLQHcpFrksSA651St7trLfWRtCim0E/"}]},{"h":["647eff60c9f5996b"],"k":[{"i":"647eff60c9f5996b","s":"pANkE+L4G3PcsxeeAfYoZg==","v":"BKAvXDSNFRb4CMYk","c":"CHkhY5Bp+uAl2ZbOqV4b33xwdwc8JD944bw2ogNhdV1tTe4FOBJiSNvjuggb"}]},{"h":["ffc125862e0d977f"],"k":[{"i":"ffc125862e0d977f","s":"DDXde+bpXpxDKApV0zZa7g==","v":"SGQUNZhQJU55xkJF","c":"/nFOZrMXj6xaxaWlNPWz7SjRRJTdWr2jVqs7rGeGkDvLt1wIVOSOwMzjLjVg"}]},{"h":["88fbe5caf26fb4b6"],"k":[{"i":"88fbe5caf26fb4b6","s":"/dCu24OLbKMyQ8UoQZUVPw==","v":"HkYxVRADQ0M7O0jy","c":"kDc3Nkl+jtW4lf6JCgGs4Y3WOvJARcKZR94doTR6gAa+rW42otyewe5QRhqj"}]},{"h":["97424835d841af0f"],"k":[{"i":"97424835d841af0f","s":"X/AOcwfscRa016cCqfxESQ==","v":"LOxiGEQVc5p1trZS","c":"kkfzNvtZYrvpyId7We/7Rw96MI7qRuKtNl9fcl6c9yVheCH3nxXsSef7s7drccLWqmkdSQ=="}]},{"h":["3422cb29a5639776"],"k":[{"i":"3422cb29a5639776","s":"cS5UXqMCoJfXNRA5fYDiEg==","v":"+UlZSmKPd/3lRXnW","c":"XEzmFYGgfFSVTO8mpPCfJwIi8m1ORUg1bGpstkYJgJDRv5fljv0zYEUkSeKHfreDTn2a"}]},{"h":["e450cd60b0045085"],"k":[{"i":"e450cd60b0045085","s":"b1SlGm9NMOXiuGAJzRJi9A==","v":"bwIVXEgwRRU4wA4u","c":"hfJzgO0GO38/qjpkQfmCCdXKM2CyxgvCdCz9e0PTHinXaUg/JB7fe4/jGshUWIiI8l9IDmXJEo+CTqpK5NuVv0IKpt7V"}]},{"h":["a8fb5f993d7546fe","7c54e6a81baed3b7"],"k":[{"i":"a8fb5f993d7546fe","s":"4IAFfuai1aRpnwlhOeF8Ew==","v":"+ejnAzuxgczf9Gv2","c":"eO4RDep2CPE9a2o89GNU4wHri8e2dxG4WjI5fjb7W28hwB/marabYCavWU/J"},{"i":"7c54e6a81baed3b7","s":"8LG8Sy2KsKgEg14G7475zA==","v":"hXFonQTxe5T1ZvaT","c":"k9YxUFesWih8sqbYY4WX10qoXnhyKQy/8Thirr7IzEhoK1fAiL8UyQfUTbvG"}]},{"h":["f484dcb19f3d1847"],"k":[{"i":"f484dcb19f3d1847","s":"dI6CaT2WfY975L570p85KA==","v":"iFOzlJtJpPUrgVUA","c":"vcfiPWyatEvx7MTtDP3BMdBJvhmPWjf2IPB3xEcButZyVkop0uFNc/6N7H30BmYHXJW8odVCeCf3i/6ODdyO/A=="}]},{"h":["a6db8fea6f245264"],"k":[{"i":"a6db8fea6f245264","s":"pCUHMEvPpffmnAXTDVVBvw==","v":"oxKo1ouH8pDhMBG4","c":"04a7ag9dIEH4cqvMefQBZQqGySIp3X/MLO0ono9RyRmllF35imk4OBUvJF9TjE78"}]},{"h":["25f424615cac36a1"],"k":[{"i":"25f424615cac36a1","s":"+JOfR5aYZTqQfywY48Rc5g==","v":"8EM5F+iOvXMjUO7v","c":"6pCrsd2HLySRtKw0TemknBoXtdFB12Dq6mjaPDrnW7QYsFavH4sapJS087BLcTe6hg=="}]},{"h":["44302ce9048bceb8"],"k":[{"i":"44302ce9048bceb8","s":"Ko8Xq377/L/0d6k9CoNziw==","v":"6f58aEvNOvEu3FJa","c":"eVpEBFrsIYOZa5GFjoXuF6ZdNKJVmENnfto+ZkEMjpUyDwvTPbW59bYybB47vRpl"}]},{"h":["d85aa827144ed4d2"],"k":[{"i":"d85aa827144ed4d2","s":"zhpSXm+R0lbs2e1BqivR4g==","v":"KaAH2PPMnY4naWzt","c":"pYuE4nb8Vf+WrOgiRV2kE6jyqM7uZdWn0mjBv0Qy1fPnPAeImO+xbA6eW0ot8c46Z2VVd4KLzvajNHYOZhlt"}]},{"h":["80d3535ae0caea21"],"k":[{"i":"80d3535ae0caea21","s":"aoTpGMdiWlLvS4l4HfZeaw==","v":"Zv4dJjss3cuM9tqJ","c":"Wo+I3x7Y/G8Baab4HMhHphyGVaASki44NtcNGgTI2jKNlnQ2611hiFuo3sbX"}]},{"h":["4ebd6fa369ae4f33","abdb7287f75f46ac"],"k":[{"i":"4ebd6fa369ae4f33","s":"oN9Wuc0DLF7V+A80/HO0qQ==","v":"QkK05Vaf735jS+HA","c":"GImeaUvGWSz5Du32TdgqFKvZVLfBMcoLq+uj4oIPVMJfVvBaw01h6moXi8in"},{"i":"abdb7287f75f46ac","s":"MeGsxPJ21wmARGTfNGrMRg==","v":"3yTAdlslkZ5qVsGn","c":"4XBISGozngDTtJxDNAOkyPXNDAshfc/pcGUqIb7vWBfCdth8jZlGaO7vQuoQ"}]},{"h":["89143507727a6790","871a242e06f33ccd"],"k":[{"i":"89143507727a6790","s":"UiKg0fSxk6JFsypmCb5FyA==","v":"ql6/qi+N1OW8ygA0","c":"A/M8xgCOcvTSB/IdznK2Rb6PcXB5IKcDclgnBGUDKJdKQSsm6Qu+gmgc3NVTkQD5Zztu"},{"i":"871a242e06f33ccd","s":"92VNidGzwZbF2SEpM78s9Q==","v":"HsXDsrdB/b1VtU2B","c":"IcV6GeCw8PlEji0YkusiLZaaA0GFtjHO+jNAEIw/lxGz1cSbNaXNvk/JRTP9UrgXTJiY"}]},{"h":["9a4f0f94fc544065","f1a6153dfeebb407"],"k":[{"i":"9a4f0f94fc544065","s":"UvMuemBmaiK0uIwlERHOpA==","v":"xXdx8dPw2BZPGG9n","c":"R8R6dyesaJ/kKNv6h0CSbhi6SjQw9J81YSyP2buTiEm8mS9ADuNaNOLppL3Z"},{"i":"f1a6153dfeebb407","s":"JE3luOwepaIszBbDWBQlRw==","v":"LdZqSqkZgpXam0e5","c":"eVY3oUqbFSKvLc3+Cd1p8MAa6EVyGibwrFfcwEZKqYtzzq9Kkf/goiaGr8cN"}]},{"h":["b718b8c94749de83","2e993a674fc0ba93"],"k":[{"i":"b718b8c94749de83","s":"aHCu423F+c419GB6jXEPGg==","v":"+wDf0Za8aHTpgLSk","c":"RCefiIjhHK++/8ckNzeh6XaqNywhCgpK7SrwTcX8Rh+BYd282bUSNO1c"},{"i":"2e993a674fc0ba93","s":"CrNHpkTWBH+jTboGbINyoA==","v":"+Z6cN8I6zm/Cc96J","c":"GlTjdrzMYGtX3IeqMZYqqDafhqYXg3l72/6xJtiu475vsKuWDVsn6e0f"}]},{"h":["3e2100a87e66314e"],"k":[{"i":"3e2100a87e66314e","s":"yX/dugOjOHnoXP/R0OICXA==","v":"x/urfI40rTtjQZtf","c":"XecHwKm1tYryvCojX/AqthCF25xQ6DV1kxR+ZdHZ6pa3TIOTVH/TbBviKflZM/hd"}]},{"h":["bfad63cec48fd2be"],"k":[{"i":"bfad63cec48fd2be","s":"qG0Gz3b9igjTCCodVBBp9g==","v":"FNKwu1SfSeFF19jR","c":"yNIPeRoXOf3ObmHfMumyJ6OxnyPEsgUutGyDYsRb3S76XXQ6XSj10q73B3v1S1k0pWT74pFCjUlzGqhaYJrktu3V53pu1w=="}]},{"h":["4e7c66698c2465d1"],"k":[{"i":"4e7c66698c2465d1","s":"YY+lDclU6oGh9U86UMtzJg==","v":"8zpsTes5e6Pfq38Y","c":"SSwWtK3U/eXNj6nl27Der1R3MBbImhzDizexgNy2hF7phYT8tFJd+yQeFENsjrkU"}]},{"h":["509d712f8ef90d17","9c3327f027e5f541"],"k":[{"i":"509d712f8ef90d17","s":"wJSFvWw17z+UkrXLurfJ9Q==","v":"r1NsTzJG03PPHzN1","c":"DFsJ4xxm6RifDRpie0KR/qU0kraFwFONgCYOoNdics5NxC7tYGB62qZ6tnoh"},{"i":"9c3327f027e5f541","s":"iHIWzdlPKWQWrXEioBNSXg==","v":"Okv+0+ZRpQMOrbpN","c":"+3NyBYdOpq+uVe3q9DH5nz/n144S7Iq/4bqXjwSF6jv6FlfWTZ92QwEAALf+"}]},{"h":["d64522c63dd36877"],"k":[{"i":"d64522c63dd36877","s":"A5jPOrA5A1XX8xJuZ30Inw==","v":"5OAqSY0CypQdHcqn","c":"GM3dKxfHZB+7B7OMVQVW7MvzuacQ1JzuJmfWcVFM8skWZFMEieI2F5pT7vGJ"}]},{"h":["1c19d618b38bd3ee","a8b5c4c35bd9581a"],"k":[{"i":"1c19d618b38bd3ee","s":"BdhOuhzHPBxv20FodoghpQ==","v":"fWVKDDbNa4iMfioK","c":"/ii9PyoR67bXy/eMG37MsI+BY2AyK5RkP41um6TyKYbOCbL4nOWfWDM06cL8"},{"i":"a8b5c4c35bd9581a","s":"BS2fQa5CHRtbbrK5DImV+w==","v":"zY3LC28lj3MFBnMS","c":"t3QOQL090I/D3VoS4T/kqOeTMcInpg0hG4Ry1zQZbKprJow7dYtDM0DtYdu3"}]},{"h":["1ed99c6445c90cd9"],"k":[{"i":"1ed99c6445c90cd9","s":"VcNnzAU3yWanjBbtAOnu7g==","v":"u7sIYNEiVDVJeqAq","c":"2Z11tEh0c/WcHJct4MT3AGvvKqCVrcD+8y5AkyZmJENRU3S0yE8owflYR61r"}]},{"h":["b36c28e61aa4465a"],"k":[{"i":"b36c28e61aa4465a","s":"+iyD1tk4cBaHNqcjLVefIg==","v":"l8Dr9XvSkloYfwAg","c":"jDX/iELaQi9mfncvpWNoo10/rlHMR0Eloh+d47N+TH7mDA93ciLUdJf8vYRGLZoSIgpyHqhNtGbTPfN1W59Fd2+hPQ=="}]},{"h":["7062fdb1e852f9e5"],"k":[{"i":"7062fdb1e852f9e5","s":"6Eg/n3+iatRQZ1HoOWIYvA==","v":"jVTrxiK+laj9Wljk","c":"mwN1GFxYi/2pY3lZ30YOorWYcZDIt8hC/cr7eFHrbUrnesCTJWRuH8NlFy07hIOmEtvZ7Npgww63RiAh26XvNw=="}]}];
+var ITER = 150000;   /* 必須與 build_tickets.py 的 ITER 一致 */
+
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var PK="hns-photo-", SK="hns-tickets";
+  var tickets=null, activeName=null, target=null;
+
+  function put(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function b64(x){var s=atob(x),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return a}
+
+  function sha16(t){
+    return crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)).then(function(b){
+      return Array.prototype.map.call(new Uint8Array(b),function(x){return ("0"+x.toString(16)).slice(-2)}).join("").slice(0,16);
+    });
+  }
+
+  function unlock(email,rec){
+    var e=new TextEncoder().encode(email);
+    return crypto.subtle.importKey("raw",e,"PBKDF2",false,["deriveKey"]).then(function(km){
+      return crypto.subtle.deriveKey(
+        {name:"PBKDF2",salt:b64(rec.s),iterations:ITER,hash:"SHA-256"},
+        km,{name:"AES-GCM",length:256},false,["decrypt"]);
+    }).then(function(key){
+      return crypto.subtle.decrypt({name:"AES-GCM",iv:b64(rec.v)},key,b64(rec.c));
+    }).then(function(pt){
+      return JSON.parse(new TextDecoder().decode(pt)).n;
+    });
+  }
+
+  function view(id){ ["v-login","v-list","v-ticket"].forEach(function(v){ $(v).hidden=(v!==id) }); window.scrollTo(0,0) }
+  function seatOf(t){ return t.s ? ((EVENT.hall?EVENT.hall+"\u3000":"")+t.s) : null }
+  function find(name){ for(var i=0;i<tickets.length;i++) if(tickets[i].n===name) return tickets[i]; return null }
+
+  function photoBox(el,name,stamp){
+    var d=get(PK+name); el.innerHTML="";
+    if(d){
+      var im=document.createElement("img"); im.src=d; im.alt="登錄照片"; el.appendChild(im);
+      if(stamp){var st=document.createElement("span");st.className="stamp";st.textContent="\u8a8d\u8a3c\u6e08";el.appendChild(st)}
+    }else{
+      var p=document.createElement("span"); p.className="ph"; p.innerHTML="\u672a\u767b\u9304<br>NO PHOTO"; el.appendChild(p);
+    }
+  }
+
+  function renderList(){
+    var wrap=$("tlist"); wrap.innerHTML="";
+    tickets.forEach(function(t){
+      var b=document.createElement("button"); b.className="trow"; b.type="button";
+      var seat=seatOf(t);
+      b.innerHTML='<span class="stub"><svg width="22" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4h20v3a2 2 0 000 4v3H1v-3a2 2 0 000-4V4z"/></svg></span>'+
+        '<span class="tmeta">'+
+          '<span class="small">'+EVENT.kicker+'</span>'+
+          '<span class="big">'+EVENT.date+' '+EVENT.start+'</span>'+
+          '<span class="line">[\u958b\u5834] '+EVENT.open+'\u3000[\u958b\u6f14] '+EVENT.start+'<br>'+EVENT.venue+'</span>'+
+          '<span class="line">\u5ea7\u5e2d\u756a\u53f7\u3000'+(seat||"\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059")+'</span>'+
+          '<span class="nm">\u6c0f\u540d\u3000'+t.n+'</span>'+
+        '</span>'+
+        '<span class="chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2l4 4-4 4"/></svg></span>';
+      b.addEventListener("click",function(){ openTicket(t.n) });
+      wrap.appendChild(b);
+    });
+
+    var f=$("faces"); f.innerHTML="";
+    tickets.forEach(function(t){
+      var has=!!get(PK+t.n);
+      var row=document.createElement("div"); row.className="facerow";
+      row.innerHTML='<div class="facecol">'+
+        '<div class="okbar'+(has?"":" none")+'">'+
+          (has?'<svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor"><circle cx="7.5" cy="7.5" r="7.5"/><path d="M4 7.6l2.4 2.4L11 5.4" stroke="#fff" stroke-width="1.8" fill="none"/></svg>':'')+
+          '<span>'+(has?"\u9854\u5199\u771f\u306e\u767b\u9332\u304c\u5b8c\u4e86\u3057\u307e\u3057\u305f\u3002":"\u9854\u5199\u771f\u306f\u672a\u767b\u9332\u3067\u3059\u3002")+'</span>'+
+        '</div>'+
+        '<span class="k">'+t.n+'</span>'+
+        '<button class="btn small" type="button">'+(has?"\u91cd\u65b0\u767b\u9332":"\u9854\u5199\u771f\u3092\u767b\u9332")+'</button>'+
+      '</div><div class="photo"></div>';
+      photoBox(row.querySelector(".photo"),t.n,false);
+      row.querySelector("button").addEventListener("click",function(){ pick(t.n,row.querySelector(".photo")) });
+      f.appendChild(row);
+    });
+  }
+
+  function openTicket(name){
+    var t=find(name); if(!t) return;
+    activeName=name;
+    $("d-kicker").textContent=EVENT.kicker; $("d-date").textContent=EVENT.date;
+    $("d-open").textContent=EVENT.open;     $("d-start").textContent=EVENT.start;
+    $("d-venue").textContent=EVENT.venue;   $("d-addr").textContent=EVENT.addr;
+    $("d-who").textContent=name;
+    var s=seatOf(t), el=$("d-seat");
+    el.textContent = s || "\u5ea7\u5e2d\u756a\u53f7\u306f\u5f53\u65e5\u53d7\u4ed8\u306b\u3066\u304a\u77e5\u3089\u305b\u3057\u307e\u3059";
+    el.className = s ? "v" : "v pend";
+    $("d-reg").textContent = get(PK+name) ? "\u91cd\u65b0\u767b\u9332" : "\u9854\u5199\u771f\u3092\u767b\u9332";
+    photoBox($("d-photo"),name,true);
+    view("v-ticket");
+  }
+
+  function pick(name,el){ target={name:name,el:el}; $("file").click() }
+
+  $("file").addEventListener("change",function(){
+    var f=this.files&&this.files[0]; this.value="";
+    if(!f||!target) return;
+    var t=target, fr=new FileReader();
+    fr.onload=function(){
+      var img=new Image();
+      img.onload=function(){
+        var M=420,w=img.width,h=img.height,sc=Math.min(1,M/Math.max(w,h));
+        var c=document.createElement("canvas");
+        c.width=Math.max(1,Math.round(w*sc)); c.height=Math.max(1,Math.round(h*sc));
+        c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+        var out; try{out=c.toDataURL("image/jpeg",.82)}catch(e){out=fr.result}
+        var ov=document.createElement("div"); ov.className="scanning"; t.el.appendChild(ov);
+        setTimeout(function(){
+          put(PK+t.name,out);
+          if(activeName===t.name&&!$("v-ticket").hidden){ openTicket(t.name) } else { renderList() }
+        },1100);
+      };
+      img.onerror=function(){ alert("\u9019\u500b\u6a94\u6848\u8b80\u4e0d\u51fa\u4f86\uff0c\u63db\u4e00\u5f35\u5716\u7247\u8a66\u8a66\u3002") };
+      img.src=fr.result;
+    };
+    fr.readAsDataURL(f);
+  });
+
+  $("d-reg").addEventListener("click",function(){ pick(activeName,$("d-photo")) });
+  $("back").addEventListener("click",function(){ renderList(); view("v-list") });
+  $("logout").addEventListener("click",function(){
+    put(SK,null); tickets=null; $("acct").value=""; view("v-login");
+  });
+
+  function enter(list,remember){
+    tickets=list;
+    if(remember){ put(SK,JSON.stringify(list)) }
+    renderList(); view("v-list");
+  }
+
+  function fail(msg){
+    $("err").textContent=msg; $("err").hidden=false;
+    $("login").disabled=false; $("login").textContent="\u30ed\u30b0\u30a4\u30f3";
+  }
+
+  function doLogin(){
+    var q=$("acct").value.trim().toLowerCase();
+    if(!q) return;
+    $("err").hidden=true;
+    if(!(window.crypto&&crypto.subtle)){ return fail("\u9019\u500b\u700f\u89bd\u5668\u4e0d\u652f\u63f4\uff0c\u8acb\u6539\u7528 Chrome \u6216 Safari\u3002") }
+    $("login").disabled=true; $("login").textContent="\u7167\u5408\u4e2d\u2026";
+    sha16(q).then(function(h){
+      var rec=null;
+      for(var i=0;i<ACCOUNTS.length&&!rec;i++)
+        for(var j=0;j<ACCOUNTS[i].k.length;j++)
+          if(ACCOUNTS[i].k[j].i===h){ rec=ACCOUNTS[i].k[j]; break }
+      if(!rec){ return fail("\u627e\u4e0d\u5230\u9019\u500b\u4fe1\u7bb1\u3002\u8acb\u7528\u6536\u5230\u9019\u500b\u9023\u7d50\u7684\u90a3\u500b\u4fe1\u7bb1\uff0c\u6216\u76f4\u63a5\u79c1\u8a0a\u86cb\u982d\u3002") }
+      return unlock(q,rec).then(function(list){
+        $("login").disabled=false; $("login").textContent="\u30ed\u30b0\u30a4\u30f3";
+        enter(list,true);
+      });
+    }).catch(function(){ fail("\u8cc7\u6599\u89e3\u4e0d\u958b\uff0c\u9ebb\u7169\u79c1\u8a0a\u86cb\u982d\u3002") });
+  }
+  $("login").addEventListener("click",doLogin);
+  $("acct").addEventListener("keydown",function(e){ if(e.key==="Enter") doLogin() });
+
+  var saved=get(SK);
+  if(saved){ try{ enter(JSON.parse(saved),false) }catch(e){ view("v-login") } }
+  else { view("v-login") }
+})();
+</script>
+</body>
+</html>
