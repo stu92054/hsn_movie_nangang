@@ -192,11 +192,13 @@
   .row .v.pend{ font-size:13px; font-weight:500; color:var(--ink-2) }
   hr.hair{ border:0; border-top:1px solid var(--rule); margin:1px 0 }
   .perf{ position:relative; height:27px; display:flex; align-items:center }
+  /* --f：缺口邊緣的柔化寬度，固定約 1 個實體像素，低解析度不鋸齒、高解析度不糊 */
+  .perf{ --f:1px } @media (min-resolution:2dppx){ .perf{ --f:.5px } } @media (min-resolution:3dppx){ .perf{ --f:.34px } }
   .perf{ background:var(--paper);
-    -webkit-mask:radial-gradient(circle 11px at 0 calc(50% + .5px),transparent 10.5px,#000 11px) left/51% 100% no-repeat,
-                 radial-gradient(circle 11px at 100% calc(50% + .5px),transparent 10.5px,#000 11px) right/51% 100% no-repeat;
-            mask:radial-gradient(circle 11px at 0 calc(50% + .5px),transparent 10.5px,#000 11px) left/51% 100% no-repeat,
-                 radial-gradient(circle 11px at 100% calc(50% + .5px),transparent 10.5px,#000 11px) right/51% 100% no-repeat }
+    -webkit-mask:radial-gradient(circle 11px at 0 calc(50% + .5px),transparent 10.5px,#000 calc(10.5px + var(--f))) left/51% 100% no-repeat,
+                 radial-gradient(circle 11px at 100% calc(50% + .5px),transparent 10.5px,#000 calc(10.5px + var(--f))) right/51% 100% no-repeat;
+            mask:radial-gradient(circle 11px at 0 calc(50% + .5px),transparent 10.5px,#000 calc(10.5px + var(--f))) left/51% 100% no-repeat,
+                 radial-gradient(circle 11px at 100% calc(50% + .5px),transparent 10.5px,#000 calc(10.5px + var(--f))) right/51% 100% no-repeat }
   .perf i{ display:block; flex:1; margin:0 18px; height:0; border-top:2px dashed #D3D7D1 }
   .t-foot{ padding:2px 20px 22px; display:flex; gap:14px; align-items:flex-end }
 
